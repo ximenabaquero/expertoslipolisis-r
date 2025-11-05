@@ -1,0 +1,141 @@
+* {
+  box-sizing: border-box;
+}
+
+.admin-login-page {
+  font-family: "Arial", sans-serif;
+  line-height: 1.6;
+  color: #333;
+  overflow-x: hidden;
+  background-color: #f9fafc;
+  min-height: 100vh;
+}
+
+.admin-login-header {
+  background: linear-gradient(135deg, #00b894 0%, #74b9ff 100%);
+  color: white;
+  padding: 1rem 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin-login-header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-login-logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.admin-login-logo-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  padding: 5px;
+}
+
+.admin-login-logo h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.admin-login-hero {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 150px 20px 100px;
+}
+
+.admin-login-box {
+  max-width: 450px;
+  width: 100%;
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.admin-login-box h2 {
+  color: #00b894;
+  margin-bottom: 5px;
+  font-size: 2rem;
+}
+
+.admin-login-box p {
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.admin-login-form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.admin-login-form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #444;
+}
+
+.admin-login-form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.admin-login-form-group input:focus {
+  border-color: #00b894;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 184, 148, 0.2);
+}
+
+.admin-login-btn {
+  background: #00b894;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.admin-login-btn:hover {
+  background: #009975;
+  transform: translateY(-1px);
+}
+
+.admin-login-error {
+  color: #e74c3c;
+  margin-top: 15px;
+  font-weight: 600;
+}
+
+.admin-login-footer {
+  text-align: center;
+  padding: 20px;
+  background: #333;
+  color: #ccc;
+  font-size: 0.9rem;
+}

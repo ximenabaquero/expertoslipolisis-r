@@ -1,0 +1,128 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  line-height: 1.6;
+  color: #333;
+  overflow-x: hidden;
+}
+
+.adminpanel-header {
+  background: linear-gradient(135deg, #00b894 0%, #74b9ff 100%);
+  color: white;
+  padding: 1rem 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.adminpanel-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.adminpanel-logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.adminpanel-logo-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  padding: 5px;
+}
+
+.adminpanel-logo h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.adminpanel-gestion {
+  padding: 120px 40px 60px;
+  background-color: #f8fafc;
+  min-height: 100vh;
+}
+
+.adminpanel-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.adminpanel-topbar h2 {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: #000000;
+}
+
+.adminpanel-add-btn {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.adminpanel-add-btn:hover {
+  background-color: #1d4ed8;
+}
+
+.adminpanel-cards-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 25px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.adminpanel-footer {
+  text-align: center;
+  padding: 15px;
+  background: #333;
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+.adminpanel-add-btn {
+  border: none;
+  outline: none;
+}
+
+.logout-fixed-btn {
+  position: fixed;
+  top: 20px;
+  right: 40px;
+  background-color: #ffffffff;
+  color: black;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+  z-index: 9999;
+}
+
+.logout-fixed-btn:hover {
+  background-color: #eaebffff;
+}
