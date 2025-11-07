@@ -1,0 +1,264 @@
+.drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: flex-end;
+  z-index: 9999;
+}
+
+.drawer-panel {
+  background: white;
+  width: 480px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.drawer-header {
+  padding: 24px 32px;
+  border-bottom: 1px solid #e5e7eb;
+  background: white;
+}
+
+.drawer-header h4 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111827;
+  margin-top: -5px;
+}
+
+.drawer-body {
+  padding: 32px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  overflow-y: auto;
+}
+
+.drawer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.drawer-section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.drawer-image-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  width: fit-content;
+}
+
+.drawer-image-label.before {
+  background-color: #00213f;
+  color: #ffffff;
+  border: 1px solid #00213f;
+}
+
+.drawer-image-label.after {
+  background-color: #00213f;
+  color: #ffffff;
+  border: 1px solid #00213f;
+}
+
+.drawer-file-input-wrapper {
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  padding: 40px 24px;
+  text-align: center;
+  background: #fafafa;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.drawer-file-input-wrapper:hover {
+  border-color: #9ca3af;
+  background: #f8fafc;
+}
+
+.drawer-file-input-text {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.drawer-file-input-button {
+  background: #6b7280;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: inline-block;
+}
+
+.drawer-file-input-button:hover {
+  background: #000000;
+}
+
+.drawer-file-input {
+  display: none;
+}
+
+.drawer-image-preview {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.drawer-image-preview img {
+  max-width: 100%;
+  max-height: 250px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 2px solid #e5e7eb;
+}
+
+.drawer-image-preview-text {
+  font-size: 0.8rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.drawer-change-image-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.drawer-change-image-btn:hover {
+  background: #2563eb;
+}
+
+.drawer-desc-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.drawer-desc-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.drawer-desc-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  outline: none;
+  background: white;
+  transition: border-color 0.2s ease;
+}
+
+.drawer-desc-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.drawer-desc-input::placeholder {
+  color: #9ca3af;
+}
+
+.drawer-char-count {
+  font-size: 0.75rem;
+  color: #6b7280;
+  text-align: right;
+}
+
+.drawer-footer {
+  display: flex;
+  gap: 12px;
+  padding: 24px 32px;
+  border-top: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.btn-cancel {
+  background: white;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 580;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 1;
+}
+
+.btn-cancel:hover {
+  background: #f9fafb;
+  border-color: #303846;
+}
+
+.btn-save {
+  background: #003cbe;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 580;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  flex: 1;
+}
+
+.btn-save:hover {
+  background: #00213f;
+}
+
+.drawer-close-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  z-index: 10000;
+}
+
+.drawer-close-btn:hover {
+  background: #f3f4f6;
+  color: #374151;
+}

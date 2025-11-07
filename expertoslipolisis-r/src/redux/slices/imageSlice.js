@@ -19,9 +19,7 @@ export const uploadImage = createAsyncThunk(
   "images/upload",
   async ({ before, after, description }, { getState, rejectWithValue }) => {
     try {
-      const token = getState().auth?.token;
-      console.log("[imageSlice] uploadImage - token:", token);
-
+      const token = getState().auth?.token?.trim();
       if (!token)
         return rejectWithValue("No hay token de autenticación (frontend).");
 
@@ -54,15 +52,15 @@ export const deleteImage = createAsyncThunk(
   "images/delete",
   async (id, { getState, rejectWithValue }) => {
     try {
-      const token = getState().auth?.token;
-      console.log("[imageSlice] deleteImage - token:", token, "id:", id);
-
+      const token = getState().auth?.token?.trim();
       if (!token)
         return rejectWithValue("No hay token de autenticación (frontend).");
 
-      const res = await axios.delete(`${API_URL}/delete/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+
+      const res = await axios.delete(`${API_URL}/delete/${id}`, { headers });
 
       return id;
     } catch (err) {
@@ -70,9 +68,7 @@ export const deleteImage = createAsyncThunk(
         "[imageSlice] deleteImage error:",
         err.response || err.message
       );
-      const backendMsg =
-        err.response?.data || err.response?.data?.message || err.message;
-      return rejectWithValue(backendMsg || "Error al eliminar imagen");
+      return rejectWithValue(err.response?.data || "Error al eliminar imagen");
     }
   }
 );
@@ -84,7 +80,14 @@ const imagesSlice = createSlice({
     loading: false,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    addTempCard: (state, action) => {
+      state.list.unshift(action.payload);
+    },
+    removeTempCard: (state, action) => {
+      state.list = state.list.filter((img) => img.id !== action.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder
       // FETCH
@@ -98,11 +101,13 @@ const imagesSlice = createSlice({
           id: item.id,
           beforeUrl: item.beforeImage
             ? `data:image/jpeg;base64,${item.beforeImage}`
-            : "/placeholder.jpg",
+            : null,
           afterUrl: item.afterImage
             ? `data:image/jpeg;base64,${item.afterImage}`
-            : "/placeholder.jpg",
-          description: item.description || "",
+            : null,
+          description: item.description,
+
+          isTemp: false,
         }));
       })
       .addCase(fetchImages.rejected, (state, action) => {
@@ -117,7 +122,18 @@ const imagesSlice = createSlice({
       })
       .addCase(uploadImage.fulfilled, (state, action) => {
         state.loading = false;
-        state.list.push(action.payload);
+        const img = action.payload;
+
+        const newImage = {
+          id: img.id,
+          beforeUrl: img.beforeImage
+            ? `data:image/jpeg;base64,${img.beforeImage}`
+            : "/placeholder.jpg",
+          afterUrl: img.afterImage
+            ? `data:image/jpeg;base64,${img.afterImage}`
+            : "/placeholder.jpg",
+          description: img.description,
+        };
       })
       .addCase(uploadImage.rejected, (state, action) => {
         state.loading = false;
@@ -140,4 +156,5 @@ const imagesSlice = createSlice({
   },
 });
 
+export const { addTempCard, removeTempCard } = imagesSlice.actions;
 export default imagesSlice.reducer;
