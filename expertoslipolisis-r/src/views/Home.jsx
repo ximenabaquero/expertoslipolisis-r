@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "./Home.css";
+import CardCarousel from "../components/CardCarousel";
 
 const Home = () => {
   useEffect(() => {
@@ -186,27 +187,13 @@ const Home = () => {
       {/* Results Section */}
       <section id="resultados" className="results-home">
         <div className="container-home">
-          <h2>Resultados de Nuestros Pacientes</h2>
+          <h2 style={{ marginBottom: "10px" }}>
+            Resultados de Nuestros Pacientes
+          </h2>
           <div className="results-grid-home">
-            {[
-              "Reducción de 5cm de cintura en 8 sesiones",
-              "Eliminación de grasa abdominal en 6 sesiones",
-              "Reducción de cartucheras en 10 sesiones",
-            ].map((text, i) => (
-              <div key={i} className="result-card-home">
-                <div className="before-after-home">
-                  <div className="image-placeholder before-home">
-                    <span>Antes</span>
-                  </div>
-                  <div className="image-placeholder after-home">
-                    <span>Después</span>
-                  </div>
-                </div>
-                <p>{text}</p>
-              </div>
-            ))}
+            <CardCarousel />
           </div>
-          <div className="results-cta-home">
+          <div className="results-cta-home" style={{ padding: "5px 0" }}>
             <p>¿Quieres ver más resultados?</p>
             <a
               href="https://wa.me/+573102719284?text=Me%20gustaría%20ver%20más%20resultados%20de%20tratamientos%20de%20lipólisis"

@@ -262,42 +262,6 @@ body {
   margin-bottom: 50px;
 }
 
-.result-card-home {
-  background: #f8f9fa;
-  padding: 20px;
-  border-radius: 15px;
-  text-align: center;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.before-after-home {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.image-placeholder-home {
-  flex: 1;
-  height: 150px;
-  background: #e9ecef;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  color: #6c757d;
-}
-
-.before-home {
-  background: #ffebee;
-  color: #d32f2f;
-}
-
-.after-home {
-  background: #e8f5e8;
-  color: #388e3c;
-}
-
 .results-cta-home {
   text-align: center;
   padding: 40px 0;

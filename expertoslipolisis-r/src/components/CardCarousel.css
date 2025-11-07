@@ -1,0 +1,123 @@
+.carousel-wrapper {
+  padding: 20px 0 80px 0;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.carousel-wrapper .swiper {
+  padding: 20px 0;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.carousel-wrapper .swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform: scale(0.9);
+  opacity: 0.6;
+}
+
+.carousel-wrapper .swiper-slide-active {
+  transform: scale(1);
+  opacity: 1;
+  z-index: 2;
+}
+
+.carousel-wrapper .swiper-slide-prev,
+.carousel-wrapper .swiper-slide-next {
+  transform: scale(0.95);
+  opacity: 0.8;
+}
+
+.carousel-wrapper .image-card {
+  margin: 0;
+  width: 420px;
+  padding: 20px;
+
+  transform-origin: center center;
+}
+
+.carousel-navigation-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-top: 40px;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  z-index: 100;
+}
+
+.carousel-wrapper .custom-prev,
+.carousel-wrapper .custom-next {
+  position: relative;
+  color: #333;
+  background: rgba(255, 255, 255, 0.95);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  border: 2px solid #f0f0f0;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.carousel-wrapper .custom-prev:hover,
+.carousel-wrapper .custom-next:hover {
+  background: white;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+}
+
+.carousel-wrapper .custom-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}
+
+.carousel-wrapper .custom-pagination .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background: #ccc;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.carousel-wrapper .custom-pagination .swiper-pagination-bullet-active {
+  background: #333;
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+  .carousel-wrapper .image-card {
+    width: 95% !important;
+    max-width: 400px !important;
+    margin: 0 auto;
+  }
+
+  .carousel-wrapper .swiper-slide {
+    transform: scale(0.95);
+  }
+
+  .carousel-wrapper .swiper-slide-active {
+    transform: scale(1);
+  }
+}
