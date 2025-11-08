@@ -218,6 +218,11 @@ body {
   text-align: center;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* NUEVO: Para alinear botones */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 380px; /* Ajusta según necesites */
 }
 
 .service-card:hover {
@@ -241,6 +246,31 @@ body {
   margin-bottom: 25px;
   color: #666;
   line-height: 1.6;
+
+  flex-grow: 1;
+}
+
+.service-card-home .btn-whatsapp-small {
+  margin-top: auto;
+  align-self: center;
+  width: auto;
+  padding: 12px 25px;
+  font-size: 0.9rem;
+  background: #25d366;
+  color: white;
+  border-radius: 50px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.service-card-home .btn-whatsapp-small:hover {
+  background: #128c7e;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
 }
 
 .results-home {

@@ -52,13 +52,7 @@ export default function NewImageDrawer({ onClose }) {
       await dispatch(
         uploadImage({ before, after, description: description.trim() })
       ).unwrap();
-
       alert("Imagen cargada correctamente ✅ ");
-
-      setTimeout(() => {
-        dispatch(fetchImages());
-      }, 500);
-
       onClose();
     } catch (err) {
       console.error(err);
@@ -101,7 +95,7 @@ export default function NewImageDrawer({ onClose }) {
               ) : (
                 <>
                   <div className="drawer-file-input-text">
-                    Arrastra y suelta o haz clic para subir
+                    Haz clic para subir
                   </div>
                   <div className="drawer-file-input-button">
                     Seleccionar Archivo
@@ -141,7 +135,7 @@ export default function NewImageDrawer({ onClose }) {
               ) : (
                 <>
                   <div className="drawer-file-input-text">
-                    Arrastra y suelta o haz clic para subir
+                    Haz clic para subir
                   </div>
                   <div className="drawer-file-input-button">
                     Seleccionar Archivo

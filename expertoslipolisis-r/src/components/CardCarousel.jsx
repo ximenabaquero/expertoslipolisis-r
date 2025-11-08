@@ -15,7 +15,9 @@ const CardCarousel = () => {
   const loading = useSelector((state) => state.images.loading);
 
   useEffect(() => {
-    dispatch(fetchImages());
+    if (!images || images.length === 0) {
+      dispatch(fetchImages());
+    }
   }, [dispatch]);
 
   if (loading) return <div>Cargando...</div>;

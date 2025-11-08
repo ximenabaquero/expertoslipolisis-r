@@ -19,8 +19,20 @@ export default function AdminPanel() {
   const isAdmin = roles.includes("ADMIN");
 
   useEffect(() => {
-    dispatch(fetchImages());
+    if (list.length === 0) {
+      dispatch(fetchImages());
+    }
   }, [dispatch]);
+
+  useEffect(() => {
+    if (!isAdmin) {
+      navigate("/", { replace: true });
+    }
+  }, [isAdmin, navigate]);
+
+  if (!isAdmin) {
+    return null;
+  }
 
   const handleLogout = () => {
     dispatch(logout());

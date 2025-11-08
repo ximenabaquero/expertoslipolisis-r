@@ -79,6 +79,7 @@ const imagesSlice = createSlice({
     list: [],
     loading: false,
     error: null,
+    lastUpdate: Date.now(),
   },
   reducers: {
     addTempCard: (state, action) => {
@@ -109,6 +110,7 @@ const imagesSlice = createSlice({
 
           isTemp: false,
         }));
+        state.lastUpdate = Date.now();
       })
       .addCase(fetchImages.rejected, (state, action) => {
         state.loading = false;
@@ -134,6 +136,8 @@ const imagesSlice = createSlice({
             : "/placeholder.jpg",
           description: img.description,
         };
+        state.list.unshift(newImage);
+        state.lastUpdate = Date.now();
       })
       .addCase(uploadImage.rejected, (state, action) => {
         state.loading = false;
@@ -148,6 +152,7 @@ const imagesSlice = createSlice({
       .addCase(deleteImage.fulfilled, (state, action) => {
         state.loading = false;
         state.list = state.list.filter((img) => img.id !== action.payload);
+        state.lastUpdate = Date.now();
       })
       .addCase(deleteImage.rejected, (state, action) => {
         state.loading = false;

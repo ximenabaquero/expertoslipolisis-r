@@ -1,61 +1,141 @@
 import React, { useEffect } from "react";
-import "./Home.css";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  createPatient,
+  resetPatientState,
+  selectPatientLoading,
+  selectPatientError,
+  selectPatientSuccess,
+} from "../redux/slices/patientSlice";
 import CardCarousel from "../components/CardCarousel";
+import "./Home.css";
 
 const Home = () => {
-  useEffect(() => {
-    const API_URL = "http://localhost:4002/patients";
-    const form = document.getElementById("contactForm");
+  const dispatch = useDispatch();
+  const loading = useSelector(selectPatientLoading);
+  const error = useSelector(selectPatientError);
+  const success = useSelector(selectPatientSuccess);
 
+  const TEST_PHONE = "+573004833345";
+
+  useEffect(() => {
+    const form = document.getElementById("contactForm");
     if (!form) return;
 
     const handleSubmit = async (e) => {
       e.preventDefault();
 
-      const nombre = document.getElementById("nombre").value.trim();
+      const fullName = document.getElementById("fullName").value.trim();
       const email = document.getElementById("email").value.trim();
-      const telefono = document.getElementById("telefono").value.trim();
-      const mensaje = document.getElementById("mensaje").value.trim();
+      const cellphone = document.getElementById("cellphone").value.trim();
+      const message = document.getElementById("message").value.trim();
 
-      if (!nombre || !email || !telefono) {
-        alert("Por favor, completa todos los campos obligatorios.");
+      const errorElement = document.querySelector(".form-feedback.error");
+      const successElement = document.querySelector(".form-feedback.success");
+      if (errorElement) errorElement.style.display = "none";
+      if (successElement) successElement.style.display = "none";
+
+      if (!fullName) {
+        showError("❌ El nombre completo es obligatorio");
+        return;
+      }
+
+      if (!email) {
+        showError("❌ El correo electrónico es obligatorio");
+        return;
+      }
+
+      if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+        showError("❌ Por favor ingresa un correo electrónico válido");
+        return;
+      }
+
+      if (!cellphone) {
+        showError("❌ El teléfono es obligatorio");
+        return;
+      }
+
+      if (!cellphone.match(/^[0-9]{10}$/)) {
+        showError("❌ El teléfono debe tener exactamente 10 números");
+        return;
+      }
+
+      if (message && message.length < 10) {
+        showError(
+          "❌ Si escribes un mensaje, debe tener al menos 10 caracteres"
+        );
+        return;
+      }
+
+      if (!fullName.match(/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/)) {
+        showError("❌ El nombre solo puede contener letras y espacios");
         return;
       }
 
       try {
-        const response = await fetch(API_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            nombre,
+        await dispatch(
+          createPatient({
+            fullName,
             email,
-            telefono,
-            mensaje,
-          }),
-        });
+            cellphone,
+            message,
+          })
+        ).unwrap();
 
-        if (!response.ok)
-          throw new Error("Error al guardar los datos del paciente");
-
-        const mensajeWhatsApp = `Hola, soy ${nombre}. Tel: ${telefono}. ${mensaje}`;
+        const mensajeWhatsApp = `Hola, soy ${fullName}. Tel: ${cellphone}. ${message}`;
         window.open(
-          `https://wa.me/+573102719284?text=${encodeURIComponent(
+          `https://wa.me/${TEST_PHONE}?text=${encodeURIComponent(
             mensajeWhatsApp
           )}`,
           "_blank"
         );
 
-        alert("✅ Datos guardados correctamente. Redirigiendo a WhatsApp...");
+        showSuccess("✅ ¡Redirigiendo a WhatsApp!");
+
         form.reset();
+
+        setTimeout(() => {
+          hideMessages();
+          dispatch(resetPatientState());
+        }, 3000);
       } catch (error) {
-        alert("❌ Hubo un error al enviar los datos. Intenta de nuevo.");
-        console.error(error);
+        showError("❌ Hubo un error al enviar los datos. Intenta de nuevo.");
+        console.error("Error:", error);
       }
+    };
+
+    const showError = (message) => {
+      const errorElement = document.querySelector(".form-feedback.error");
+      if (errorElement) {
+        errorElement.textContent = message;
+        errorElement.style.display = "block";
+      }
+    };
+
+    const showSuccess = (message) => {
+      const successElement = document.querySelector(".form-feedback.success");
+      if (successElement) {
+        successElement.textContent = message;
+        successElement.style.display = "block";
+      }
+    };
+
+    const hideMessages = () => {
+      const errorElement = document.querySelector(".form-feedback.error");
+      const successElement = document.querySelector(".form-feedback.success");
+      if (errorElement) errorElement.style.display = "none";
+      if (successElement) successElement.style.display = "none";
     };
 
     form.addEventListener("submit", handleSubmit);
     return () => form.removeEventListener("submit", handleSubmit);
-  }, []);
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (error) {
+      console.error("Error al crear paciente:", error);
+    }
+  }, [error]);
 
   return (
     <>
@@ -101,7 +181,7 @@ const Home = () => {
                   Nuestros Servicios
                 </a>
                 <a
-                  href="https://wa.me/+573102719284?text=Hola,%20me%20interesa%20información%20sobre%20los%20servicios%20de%20lipólisis%20a%20domicilio"
+                  href="https://wa.me/+573004833345?text=Hola,%20me%20interesa%20información%20sobre%20los%20servicios%20de%20lipólisis%20a%20domicilio"
                   target="_blank"
                   className="btn btn-whatsapp"
                   rel="noreferrer"
@@ -171,7 +251,7 @@ const Home = () => {
                 <h3>{s.title}</h3>
                 <p>{s.text}</p>
                 <a
-                  href={`https://wa.me/+573102719284?text=${s.query}`}
+                  href={`https://wa.me/+573004833345?text=${s.query}`}
                   target="_blank"
                   rel="noreferrer"
                   className="btn btn-whatsapp-small"
@@ -196,7 +276,7 @@ const Home = () => {
           <div className="results-cta-home" style={{ padding: "5px 0" }}>
             <p>¿Quieres ver más resultados?</p>
             <a
-              href="https://wa.me/+573102719284?text=Me%20gustaría%20ver%20más%20resultados%20de%20tratamientos%20de%20lipólisis"
+              href="https://wa.me/+573004833345?text=Me%20gustaría%20ver%20más%20resultados%20de%20tratamientos%20de%20lipólisis"
               target="_blank"
               rel="noreferrer"
               className="btn btn-whatsapp"
@@ -236,11 +316,11 @@ const Home = () => {
               <form id="contactForm" noValidate>
                 <div className="form-grid">
                   <div className="form-group">
-                    <label htmlFor="nombre">Nombre completo</label>
+                    <label htmlFor="fullName">Nombre completo</label>
                     <input
                       type="text"
-                      id="nombre"
-                      name="nombre"
+                      id="fullName"
+                      name="fullName"
                       required
                       minLength="3"
                       maxLength="50"
@@ -265,11 +345,11 @@ const Home = () => {
                     </span>
                   </div>
                   <div className="form-group">
-                    <label htmlFor="telefono">Teléfono</label>
+                    <label htmlFor="cellphone">Teléfono</label>
                     <input
                       type="tel"
-                      id="telefono"
-                      name="telefono"
+                      id="cellphone"
+                      name="cellphone"
                       pattern="^[0-9]{10}$"
                       required
                       placeholder="Ej: 3001234567"
@@ -279,10 +359,10 @@ const Home = () => {
                     </span>
                   </div>
                   <div className="form-group full">
-                    <label htmlFor="mensaje">Mensaje (opcional)</label>
+                    <label htmlFor="message">Mensaje (opcional)</label>
                     <textarea
-                      id="mensaje"
-                      name="mensaje"
+                      id="message"
+                      name="message"
                       minLength="10"
                       maxLength="300"
                       placeholder="Escribe tu mensaje "
@@ -293,7 +373,7 @@ const Home = () => {
                   </div>
                 </div>
                 <button type="submit" className="btn-primary-home">
-                  Enviar por WhatsApp
+                  {loading ? "Enviando..." : "Enviar por WhatsApp"}
                 </button>
                 <p className="form-feedback success">
                   ✅ ¡Redirigiendo a WhatsApp!
@@ -332,7 +412,7 @@ const Home = () => {
             <div className="footer-section-home">
               <h4>Contacto Rápido</h4>
               <a
-                href="https://wa.me/+573102719284"
+                href="https://wa.me/+573004833345"
                 target="_blank"
                 rel="noreferrer"
                 className="whatsapp-footer"
@@ -351,7 +431,7 @@ const Home = () => {
 
       {/* WhatsApp Floating Button */}
       <a
-        href="https://wa.me/+573102719284?text=Hola,%20me%20interesa%20información%20sobre%20sus%20servicios"
+        href="https://wa.me/+573004833345?text=Hola,%20me%20interesa%20información%20sobre%20sus%20servicios"
         target="_blank"
         rel="noreferrer"
         className="whatsapp-float"
