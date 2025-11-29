@@ -82,7 +82,7 @@ export default function AdminLogin() {
       </section>
 
       <footer className="admin-login-footer">
-        <p>&copy; 2024 Expertos en Lipólisis. Todos los derechos reservados.</p>
+        <p>&copy; 2025 Expertos en Lipólisis. Todos los derechos reservados.</p>
       </footer>
     </div>
   );
